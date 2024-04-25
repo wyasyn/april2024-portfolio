@@ -1,3 +1,10 @@
+import Hero from "@/components/hero";
+import HomeProjects from "@/components/homeProjects";
 export default function page() {
-    return <div>hello world</div>;
+    return (
+        <div>
+            <Hero />
+            <HomeProjects />
+        </div>
+    );
 }
