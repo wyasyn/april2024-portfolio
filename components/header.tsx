@@ -22,8 +22,8 @@ export default function Header({
     }, []);
     return (
         <header
-            className={`sticky left-0 top-4 z-[10000] rounded-lg container shadow border flex items-center justify-between py-1 ${
-                scrolled ? "bg-background/10 backdrop-blur-sm" : "bg-background"
+            className={`sticky left-0 top-4 z-[10000] rounded-lg container shadow border flex items-center justify-between ${
+                scrolled ? "bg-background/15 backdrop-blur-sm" : "bg-background"
             } `}
         >
             {children}
