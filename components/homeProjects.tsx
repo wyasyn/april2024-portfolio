@@ -21,7 +21,7 @@ export default async function HomeProjects() {
                         size="sm"
                         className=" shadow-sm bg-ring text-foreground flex items-center gap-2 hover:text-white "
                     >
-                        <span>View All</span>
+                        <span className=" text-sm ">View All</span>
                         <ArrowRight />
                     </Button>
                 </Link>
