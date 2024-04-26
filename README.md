@@ -60,7 +60,7 @@ If you'd like to run a local copy of my portfolio website on your machine, follo
 1. Clone this repository to your local machine using Git:
 
     ```
-    git clone https://github.com/wyasyn/next-portfolio.git
+    git clone https://github.com/wyasyn/april2024-portfolio.git
     ```
 
 2. Navigate to the project directory:
