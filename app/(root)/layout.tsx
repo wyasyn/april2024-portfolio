@@ -9,7 +9,7 @@ export default function Layout({
     return (
         <main>
             <Navbar />
-            <div className=" container rounded-lg mt-[2rem] bg-background border ">
+            <div className=" container rounded-lg my-[2rem] bg-background border ">
                 {children}
                 <Footer />
             </div>
