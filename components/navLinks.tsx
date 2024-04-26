@@ -17,7 +17,9 @@ export default function NavLinks({ url, label, icon }: linkProps) {
             <Button
                 size="icon"
                 variant="ghost"
-                className="relative rounded-full group "
+                className={`relative group ${
+                    isActive && " border-b border-popover rounded-none  "
+                } `}
             >
                 <span
                     className={`group-hover:text-popover duration-150  ${
