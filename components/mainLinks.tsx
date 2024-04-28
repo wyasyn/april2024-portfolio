@@ -1,4 +1,10 @@
-import { BookImage, CircleUserRound, Home, SwatchBook } from "lucide-react";
+import {
+    BookImage,
+    CircleUserRound,
+    Home,
+    LayoutDashboard,
+    SwatchBook,
+} from "lucide-react";
 import NavLinks from "./navLinks";
 
 const links = [
@@ -21,6 +27,11 @@ const links = [
         label: "Blog",
         icon: <SwatchBook className=" w-5" />,
         url: "/blog",
+    },
+    {
+        label: "Dashboard",
+        icon: <LayoutDashboard className=" w-5" />,
+        url: "/dashboard",
     },
 ];
 

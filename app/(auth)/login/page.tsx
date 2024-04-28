@@ -13,10 +13,12 @@ import { Label } from "@/components/ui/label";
 
 export default function LoginForm() {
     return (
-        <Card className="mx-auto max-w-sm">
+        <Card className="mx-auto max-w-sm bg-secondary">
             <CardHeader>
-                <CardTitle className="text-2xl">Login</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-2xl text-popover recoleta">
+                    Login
+                </CardTitle>
+                <CardDescription className=" text-foreground ">
                     Enter your email below to login to your account
                 </CardDescription>
             </CardHeader>
@@ -43,7 +45,10 @@ export default function LoginForm() {
                         </div>
                         <Input id="password" type="password" required />
                     </div>
-                    <Button type="submit" className="w-full">
+                    <Button
+                        type="submit"
+                        className="w-full bg-popover hover:outline hover:text-popover transition-all hover:outline-foreground"
+                    >
                         Login
                     </Button>
                     <Button variant="outline" className="w-full">

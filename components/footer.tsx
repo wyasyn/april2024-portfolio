@@ -6,7 +6,7 @@ export default function Footer() {
     return (
         <footer>
             <div className=" text-center pt-[3rem] pb-2 ">
-                <h2 className=" text-popover text-3xl font-bold ">
+                <h2 className=" recoleta text-popover text-3xl font-bold ">
                     Let&apos;s work together.
                 </h2>
                 <p className=" my-4 ">

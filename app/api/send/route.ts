@@ -1,8 +1,6 @@
-"use server";
-
+import React from "react";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import React from "react";
 import Email from "@/components/Email";
 
 const apiKey = process.env.RESEND_API_KEY;
@@ -13,9 +11,9 @@ if (!apiKey) {
 
 const resend = new Resend(apiKey);
 
-export async function sendEmail(values: FormEmailProps) {
+export async function POST(response: FormEmailProps) {
     try {
-        const { email, name, message } = values;
+        const { email, name, message } = response;
         const data = await resend.emails.send({
             from: email,
             to: "ywalum@gmail.com",

@@ -1,3 +1,4 @@
+@import "../components/recoleta/stylesheet.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -73,4 +74,17 @@
     body {
         @apply bg-accent text-foreground px-1;
     }
+    ::-webkit-scrollbar {
+        @apply w-[0.725rem];
+    }
+    ::-webkit-scrollbar-track {
+        @apply bg-accent;
+    }
+    ::-webkit-scrollbar-thumb {
+        @apply bg-foreground border-2 border-accent;
+    }
+}
+
+.recoleta {
+    font-family: "Recoleta";
 }

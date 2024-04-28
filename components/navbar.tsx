@@ -1,13 +1,7 @@
 import Link from "next/link";
 import { ModeToggle } from "./modeToggle";
 import { Button } from "./ui/button";
-import {
-    BookImage,
-    CirclePlus,
-    CircleUserRound,
-    Home,
-    SwatchBook,
-} from "lucide-react";
+import { CirclePlus } from "lucide-react";
 import Header from "./header";
 import MainLinks from "./mainLinks";
 
