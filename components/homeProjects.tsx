@@ -31,7 +31,7 @@ export default async function HomeProjects() {
                 </Link>
             </div>
             <div className=" my-[4rem] grid gap-x-[1rem] grid-cols-1 sm:grid-cols-2 gap-y-[4rem] ">
-                {projects.map((project) => (
+                {projects.slice(0, 4).map((project) => (
                     <Card
                         key={project.id}
                         image={project.image || ""}

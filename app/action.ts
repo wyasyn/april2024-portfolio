@@ -42,7 +42,6 @@ export const addProjectData = async ({
                 typeId: type.id,
             },
         });
-        console.log(project);
 
         return { success: true };
     } catch (error) {

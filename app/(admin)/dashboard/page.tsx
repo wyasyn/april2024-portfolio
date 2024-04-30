@@ -38,7 +38,7 @@ export default async function page() {
                                 key={project.id}
                                 className="bg-background p-4 cursor-pointer rounded-lg w-full h-full hover:bg-background border"
                             >
-                                <div>
+                                <div className=" grid">
                                     <small className="bg-card px-4 py-1 rounded-md">
                                         {project.type.name}
                                     </small>
