@@ -13,6 +13,7 @@ export default async function page({
     params: { id: string };
 }) {
     const project = await getProjectById(id);
+    if (!project) return <div>No project with id: {id}</div>;
 
     async function editProject(formData: FormData) {
         "use server";

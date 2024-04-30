@@ -45,7 +45,7 @@ const UploadForm = ({ addProjectData }: any) => {
         try {
             setLoading(true);
             const response = await axios.post(
-                "https://imagestore-d8r4.onrender.com/upload",
+                "https://imagestore-3uwu.onrender.com/upload",
                 formData,
                 {
                     headers: {
