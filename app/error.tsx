@@ -16,8 +16,8 @@ export default function Error({
     }, [error]);
 
     return (
-        <div className=" container bg-background ">
-            <h2 className=" text-popover text-3xl font-semibold recoleta ">
+        <div className=" flex flex-col justify-center text-center container bg-background rounded-lg border py-8 mt-[10rem] ">
+            <h2 className=" mb-10 text-popover text-3xl font-semibold recoleta ">
                 Something went wrong!
             </h2>
             <Button

@@ -4,8 +4,10 @@ export default function Layout({
     children: React.ReactNode;
 }>) {
     return (
-        <main className=" min-h-screen flex items-center justify-center ">
-            {children}
+        <main>
+            <div className=" w-full h-dvh grid place-items-center ">
+                {children}
+            </div>
         </main>
     );
 }

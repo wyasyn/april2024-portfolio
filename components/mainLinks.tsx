@@ -2,10 +2,14 @@ import {
     BookImage,
     CircleUserRound,
     Home,
-    LayoutDashboard,
+    LogIn,
+    Menu,
     SwatchBook,
 } from "lucide-react";
 import NavLinks from "./navLinks";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { Button } from "./ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 
 const links = [
     {
@@ -28,24 +32,67 @@ const links = [
         icon: <SwatchBook className=" w-5" />,
         url: "/blog",
     },
-    {
-        label: "Dashboard",
-        icon: <LayoutDashboard className=" w-5" />,
-        url: "/dashboard",
-    },
 ];
 
 export default function MainLinks() {
     return (
-        <div>
-            {links.map((link) => (
-                <NavLinks
-                    key={link.label}
-                    label={link.label}
-                    icon={link.icon}
-                    url={link.url}
-                />
-            ))}
-        </div>
+        <>
+            <div className=" flex items-center justify-center md:hidden ">
+                <Sheet>
+                    <SheetTrigger asChild>
+                        <Button variant="ghost" size="icon">
+                            <Menu className=" w-5" />
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent>
+                        <div className="flex flex-col items-start mt-[3rem] ">
+                            {links.map((link) => (
+                                <NavLinks
+                                    key={link.label}
+                                    label={link.label}
+                                    icon={link.icon}
+                                    url={link.url}
+                                />
+                            ))}
+                            <SignedOut>
+                                <SignInButton>
+                                    <Button size="icon" variant="ghost">
+                                        <LogIn className=" w-5 " />
+                                        <span className=" sr-only ">
+                                            sign in
+                                        </span>
+                                    </Button>
+                                </SignInButton>
+                            </SignedOut>
+                            <SignedIn>
+                                <UserButton afterSignOutUrl="/" />
+                            </SignedIn>
+                        </div>
+                    </SheetContent>
+                </Sheet>
+            </div>
+
+            <div className=" hidden md:flex items-center gap-2 ">
+                {links.map((link) => (
+                    <NavLinks
+                        key={link.label}
+                        label={link.label}
+                        icon={link.icon}
+                        url={link.url}
+                    />
+                ))}
+                <SignedOut>
+                    <SignInButton>
+                        <Button size="icon" variant="ghost">
+                            <LogIn className=" w-5 " />
+                            <span className=" sr-only ">sign in</span>
+                        </Button>
+                    </SignInButton>
+                </SignedOut>
+                <SignedIn>
+                    <UserButton />
+                </SignedIn>
+            </div>
+        </>
     );
 }

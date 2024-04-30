@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { currentUser } from "@clerk/nextjs/server";
 import {
-    CircleUser,
     Home,
     Menu,
     Package,
@@ -12,20 +12,22 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { SignedIn, UserButton } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
-export default function Layout({
+export default async function Layout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const user = await currentUser();
+    const firstName = user?.firstName;
+    if (firstName?.toLowerCase() != "yasin") {
+        redirect("/");
+    }
+
     return (
         <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
             <div className="hidden border-r bg-secondary/40 md:block">
@@ -42,19 +44,11 @@ export default function Layout({
                     <div className="flex-1">
                         <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
                             <Link
-                                href="#"
+                                href="/dashboard"
                                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-foreground transition-all hover:text-popover"
                             >
                                 <Home className="h-4 w-4" />
                                 Dashboard
-                            </Link>
-
-                            <Link
-                                href="#"
-                                className="flex items-center gap-3 rounded-lg bg-foreground px-3 py-2 text-background transition-all hover:text-accent"
-                            >
-                                <Package className="h-4 w-4" />
-                                Products{" "}
                             </Link>
                         </nav>
                     </div>
@@ -78,7 +72,7 @@ export default function Layout({
                         <SheetContent side="left" className="flex flex-col">
                             <nav className="grid gap-2 text-lg font-medium">
                                 <Link
-                                    href="#"
+                                    href="/"
                                     className="flex items-center gap-2 text-lg font-semibold"
                                 >
                                     <Terminal className="h-6 w-6" />
@@ -87,21 +81,11 @@ export default function Layout({
                                     </span>
                                 </Link>
                                 <Link
-                                    href="#"
+                                    href="/dashboard"
                                     className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-foreground hover:text-popover"
                                 >
                                     <Home className="h-5 w-5" />
                                     Dashboard
-                                </Link>
-                                <Link
-                                    href="#"
-                                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-foreground px-3 py-2 text-background hover:text-accent"
-                                >
-                                    <ShoppingCart className="h-5 w-5" />
-                                    Orders
-                                    <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-card text-foreground ">
-                                        6
-                                    </Badge>
                                 </Link>
                             </nav>
                         </SheetContent>
@@ -118,26 +102,9 @@ export default function Layout({
                             </div>
                         </form>
                     </div>
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button
-                                variant="secondary"
-                                size="icon"
-                                className="rounded-full"
-                            >
-                                <CircleUser className="h-5 w-5" />
-                                <span className="sr-only">
-                                    Toggle user menu
-                                </span>
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent
-                            align="end"
-                            className=" bg-secondary "
-                        >
-                            <DropdownMenuItem>Logout</DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    <SignedIn>
+                        <UserButton />
+                    </SignedIn>
                 </header>
                 <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
                     {children}
