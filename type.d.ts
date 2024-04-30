@@ -5,7 +5,6 @@ type FormEmailProps = {
 };
 
 type ProjectProps = {
-    id: string;
     title: string;
     description: string;
     url: string;

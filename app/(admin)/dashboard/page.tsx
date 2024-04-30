@@ -9,7 +9,6 @@ import Link from "next/link";
 
 export default async function page() {
     const projects = await getAllProjects();
-    console.log(projects);
     return (
         <div>
             <div className=" grid gap-4 grid-rows-auto grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">

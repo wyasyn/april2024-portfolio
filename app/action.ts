@@ -30,7 +30,7 @@ export const addProjectData = async ({
                 name: typeName,
             },
         });
-        await prisma.project.create({
+        const project = await prisma.project.create({
             data: {
                 title: title,
                 description: description,
@@ -42,6 +42,7 @@ export const addProjectData = async ({
                 typeId: type.id,
             },
         });
+        console.log(project);
 
         return { success: true };
     } catch (error) {

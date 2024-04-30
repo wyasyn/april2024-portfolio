@@ -14,7 +14,7 @@ const UploadForm = ({ addProjectData }: any) => {
     const router = useRouter();
     const { toast } = useToast();
     const [file, setFile] = useState<File | null>(null);
-    const [imageUrl, setImageUrl] = useState("");
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [introduction, setIntroduction] = useState("");
@@ -23,6 +23,8 @@ const UploadForm = ({ addProjectData }: any) => {
     const [typeName, setTypeName] = useState("");
     const [url, setUrl] = useState("");
     const [loading, setLoading] = useState(false);
+    const apiUrl = "https://wyasyn.pythonanywhere.com/upload";
+    // const apiUrl = "http://127.0.0.1:5000/upload";
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = e.target.files && e.target.files[0]; // Check if files array exists and has at least one file
@@ -35,7 +37,6 @@ const UploadForm = ({ addProjectData }: any) => {
         e.preventDefault();
 
         if (!file) {
-            // Handle the case where no file is selected
             return;
         }
 
@@ -44,34 +45,30 @@ const UploadForm = ({ addProjectData }: any) => {
 
         try {
             setLoading(true);
-            const response = await axios.post(
-                "https://imagestore-3uwu.onrender.com/upload",
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                }
-            );
-            setImageUrl(response.data.image_url);
+            const response = await axios.post(apiUrl, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+
             await addProjectData({
                 title,
                 description,
                 url,
-                image: imageUrl,
+                image: response.data.image_url,
                 introduction,
                 clientName,
                 companyName,
                 typeName,
+            });
+            toast({
+                description: "Project add successfully",
             });
             router.refresh();
         } catch (error) {
             console.error("Error uploading file:", error);
         } finally {
             setLoading(false);
-            toast({
-                description: "Project add successfully",
-            });
         }
     };
 
