@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import React from "react";
 import TitleHead from "./titleHead";
 import Link from "next/link";

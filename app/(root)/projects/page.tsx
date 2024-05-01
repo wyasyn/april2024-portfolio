@@ -1,5 +1,6 @@
 import { getAllProjects } from "@/app/action";
 import Card from "@/components/card";
+export const revalidate = 0;
 import TitleHead from "@/components/titleHead";
 import { Metadata } from "next";
 
