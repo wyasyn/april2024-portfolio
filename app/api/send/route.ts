@@ -11,9 +11,10 @@ if (!apiKey) {
 
 const resend = new Resend(apiKey);
 
-export async function POST(response: FormEmailProps) {
+export async function POST(response: any) {
     try {
-        const { email, name, message } = response;
+        const body = await response.json();
+        const { email, name, message } = body;
         const data = await resend.emails.send({
             from: email,
             to: "ywalum@gmail.com",
