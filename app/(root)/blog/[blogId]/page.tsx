@@ -1,6 +1,5 @@
 import getFormattedDate from "@/lib/getFormattedDate";
 import { getPostsMeta, getPostByName } from "@/lib/posts";
-import { notFound } from "next/navigation";
 import Link from "next/link";
 import "highlight.js/styles/github-dark.css";
 import { ChevronLeft } from "lucide-react";
@@ -40,7 +39,7 @@ export async function generateMetadata({ params: { blogId } }: Props) {
 export default async function Post({ params: { blogId } }: Props) {
     const post = await getPostByName(`${blogId}.mdx`); //deduped!
 
-    if (!post) notFound();
+    if (!post) return <p>No post found</p>;
 
     const { meta, content } = post;
 
