@@ -3,36 +3,42 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model Client {
-  id    String  @id @default(uuid())
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
   name  String
   email String? @unique
   phone String?
 
   Project Project[]
+
+  @@map("clients")
 }
 
 model Company {
-  id       String  @id @default(uuid())
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
   name     String
   industry String?
 
   Project Project[]
+
+  @@map("companys")
 }
 
 model Type {
-  id   String @id @default(uuid())
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
 
   Project Project[]
+
+  @@map("types")
 }
 
 model Project {
-  id           String   @id @default(uuid())
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   title        String
   description  String
   url          String?
@@ -46,4 +52,6 @@ model Project {
   companyId String
   type      Type    @relation(fields: [typeId], references: [id])
   typeId    String
+
+  @@map("projects")
 }
