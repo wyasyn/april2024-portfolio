@@ -73,7 +73,7 @@ const UploadForm = ({ addProjectData }: any) => {
     };
 
     return (
-        <div>
+        <div className=" max-w-md ">
             <form onSubmit={handleSubmit} className=" grid gap-2 ">
                 <div>
                     <Label htmlFor="title">Title:</Label>
@@ -86,16 +86,6 @@ const UploadForm = ({ addProjectData }: any) => {
                     />
                 </div>
                 <div>
-                    <Label htmlFor="description">Description:</Label>
-                    <Textarea
-                        id="description"
-                        value={description}
-                        className=" border-foreground border "
-                        onChange={(e) => setDescription(e.target.value)}
-                        rows={5}
-                    />
-                </div>
-                <div>
                     <Label htmlFor="introduction">Introduction:</Label>
                     <Textarea
                         id="introduction"
@@ -105,6 +95,17 @@ const UploadForm = ({ addProjectData }: any) => {
                         rows={5}
                     />
                 </div>
+                <div>
+                    <Label htmlFor="description">Description:</Label>
+                    <Textarea
+                        id="description"
+                        value={description}
+                        className=" border-foreground border "
+                        onChange={(e) => setDescription(e.target.value)}
+                        rows={5}
+                    />
+                </div>
+
                 <div>
                     <Label htmlFor="clientName">Client Name:</Label>
                     <Input

@@ -11,10 +11,10 @@ export default async function page() {
     const projects = await getAllProjects();
     return (
         <div>
-            <div className=" grid gap-4 grid-rows-auto grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+            <div className=" grid gap-4 grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
                 <Link href={`dashboard/add-project`}>
                     <div
-                        className=" bg-secondary rounded-lg grid place-items-center py-[3rem] hover:bg-background cursor-pointer border-2 border-dotted border-muted "
+                        className=" bg-secondary min-h-[200px] rounded-lg flex items-center justify-center w-full hover:bg-background cursor-pointer border-2 border-dotted border-muted h-full "
                         title="Add Project"
                     >
                         <Plus size={50} />

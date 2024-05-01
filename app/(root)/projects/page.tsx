@@ -30,7 +30,9 @@ export default async function page() {
                         </p>
                     </div>
                 </div>
-                <p>No projects to display</p>
+                <div className=" bg-secondary p-[2rem] rounded-lg my-[3rem] text-xl  ">
+                    No project to show!
+                </div>
             </div>
         );
     return (
@@ -49,9 +51,6 @@ export default async function page() {
                         web applications, each project represents a unique blend
                         of skill, dedication, and ingenuity.
                     </p>
-                </div>
-                <div className=" bg-secondary p-[2rem] rounded-lg my-[3rem] text-xl  ">
-                    No project to show!
                 </div>
             </div>
 

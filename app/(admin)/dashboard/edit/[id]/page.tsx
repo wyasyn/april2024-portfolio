@@ -39,7 +39,7 @@ export default async function page({
     }
 
     return (
-        <div>
+        <div className=" max-w-md ">
             <form action={editProject} className=" grid gap-2 ">
                 <div>
                     <Label htmlFor="title">Title:</Label>
