@@ -23,8 +23,7 @@ const UploadForm = ({ addProjectData }: any) => {
     const [typeName, setTypeName] = useState("");
     const [url, setUrl] = useState("");
     const [loading, setLoading] = useState(false);
-    const apiUrl = process.env.IMAGE_URL as string;
-    // const apiUrl = process.env.IMAGE_URL_LOCAL as string;
+    const apiUrl = "https://wyasyn.pythonanywhere.com/upload";
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = e.target.files && e.target.files[0]; // Check if files array exists and has at least one file
