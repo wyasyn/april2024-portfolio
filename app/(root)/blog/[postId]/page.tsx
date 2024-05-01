@@ -8,7 +8,7 @@ export const revalidate = 86400;
 
 type Props = {
     params: {
-        blogId: string;
+        postId: string;
     };
 };
 
@@ -22,8 +22,8 @@ export async function generateStaticParams() {
     }));
 }
 
-export async function generateMetadata({ params: { blogId } }: Props) {
-    const post = await getPostByName(`${blogId}.mdx`); //deduped!
+export async function generateMetadata({ params: { postId } }: Props) {
+    const post = await getPostByName(`${postId}.mdx`); //deduped!
 
     if (!post) {
         return {
@@ -36,8 +36,8 @@ export async function generateMetadata({ params: { blogId } }: Props) {
     };
 }
 
-export default async function Post({ params: { blogId } }: Props) {
-    const post = await getPostByName(`${blogId}.mdx`); //deduped!
+export default async function Post({ params: { postId } }: Props) {
+    const post = await getPostByName(`${postId}.mdx`); //deduped!
 
     if (!post) return <p>No post found</p>;
 
