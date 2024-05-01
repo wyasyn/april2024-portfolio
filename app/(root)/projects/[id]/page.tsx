@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
     params: { id },
@@ -11,11 +12,7 @@ export async function generateMetadata({
 }) {
     const project = await getProjectById(id);
 
-    if (!project) {
-        return {
-            title: "Project Not Found",
-        };
-    }
+    if (!project) notFound();
 
     return {
         title: project.title,
@@ -44,7 +41,7 @@ export default async function page({
     params: { id: string };
 }) {
     const project = await getProjectById(id);
-    if (!project) return <div>No Project found</div>;
+    if (!project) notFound();
     const src = project.image || "";
     const imageBlur = await fetch(src).then(async (res) => {
         return Buffer.from(await res.arrayBuffer()).toString("base64");
