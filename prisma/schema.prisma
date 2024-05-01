@@ -47,11 +47,11 @@ model Project {
   dateCreated  DateTime @default(now())
 
   client    Client  @relation(fields: [clientId], references: [id])
-  clientId  String
+  clientId  String  @db.ObjectId
   company   Company @relation(fields: [companyId], references: [id])
-  companyId String
+  companyId String  @db.ObjectId
   type      Type    @relation(fields: [typeId], references: [id])
-  typeId    String
+  typeId    String  @db.ObjectId
 
   @@map("projects")
 }
