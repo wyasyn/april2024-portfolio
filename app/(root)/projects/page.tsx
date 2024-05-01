@@ -1,6 +1,11 @@
 import { getAllProjects } from "@/app/action";
 import Card from "@/components/card";
 import TitleHead from "@/components/titleHead";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Project",
+};
 
 export default async function page() {
     const projects = await getAllProjects();

@@ -1,5 +1,13 @@
-import BlogCard from "@/components/blogCard";
+export const revalidate = 86400;
+import Posts from "@/components/Posts";
+
 import TitleHead from "@/components/titleHead";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Blog",
+};
 
 export default function page() {
     return (
@@ -19,10 +27,7 @@ export default function page() {
                     </p>
                 </div>
             </div>
-            <div className=" my-[3rem] bg-secondary px-5 grid gap-[2rem] py-10 rounded-lg ">
-                <BlogCard />
-                <BlogCard />
-            </div>
+            <Posts />
         </div>
     );
 }

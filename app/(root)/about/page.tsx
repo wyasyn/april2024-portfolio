@@ -2,6 +2,11 @@ import TitleHead from "@/components/titleHead";
 import Image from "next/image";
 import aboutImg from "@/images/about.jpg";
 import Skills from "@/components/skills";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "About Me",
+};
 
 export default function page() {
     return (
@@ -18,7 +23,7 @@ export default function page() {
                 education, I embark on a journey to craft innovative solutions
                 that empower individuals and organizations.
             </p>
-            <div className=" my-[3rem] relative w-full aspect-square rounded-lg overflow-clip outline outline-secondary outline-[1rem] shadow-sm">
+            <div className=" my-[3rem] relative w-full aspect-w-16 aspect-h-9 rounded-lg overflow-clip outline outline-secondary outline-[1rem] shadow-sm">
                 <Image
                     src={aboutImg}
                     alt="hero image"

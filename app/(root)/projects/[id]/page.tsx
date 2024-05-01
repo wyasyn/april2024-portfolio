@@ -4,6 +4,40 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+export async function generateMetadata({
+    params: { id },
+}: {
+    params: { id: string };
+}) {
+    const project = await getProjectById(id);
+
+    if (!project) {
+        return {
+            title: "Project Not Found",
+        };
+    }
+
+    return {
+        title: project.title,
+        description: project.description,
+        openGraph: {
+            type: "website",
+            locale: "en_IE",
+            url: `https://www.ywalum.com/project/${id}`,
+            title: project.title,
+            description: project.description,
+            images: [
+                {
+                    url: project.image,
+                    width: 1200,
+                    height: 630,
+                    alt: project.title,
+                },
+            ],
+        },
+    };
+}
+
 export default async function page({
     params: { id },
 }: {

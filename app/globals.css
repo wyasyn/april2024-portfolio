@@ -74,6 +74,11 @@
     body {
         @apply bg-accent text-foreground px-1;
     }
+    h1,
+    h2,
+    h3 {
+        @apply recoleta text-popover;
+    }
     ::-webkit-scrollbar {
         @apply w-[0.725rem];
     }

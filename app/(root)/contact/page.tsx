@@ -1,5 +1,10 @@
 import FormCard from "@/components/formItem";
 import TitleHead from "@/components/titleHead";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Contact",
+};
 
 export default function page() {
     return (
