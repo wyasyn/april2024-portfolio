@@ -42,10 +42,8 @@ export default async function page({
 }) {
     const project = await getProjectById(id);
     if (!project) notFound();
-    const src = project.image || "";
-    const imageBlur = await fetch(src).then(async (res) => {
-        return Buffer.from(await res.arrayBuffer()).toString("base64");
-    });
+
+    const formattedDate = new Date(project.dateCreated).toLocaleString();
     const info = [
         {
             name: "client",
@@ -61,52 +59,102 @@ export default async function page({
         },
         {
             name: "date",
-            value: "2024-01-14",
+            value: formattedDate,
         },
     ];
-    return (
-        <div>
-            <div className=" bg-secondary p-4 m-2 rounded-lg grid gap-2 ">
-                {info.map((item, index) => {
-                    return (
-                        <div key={index} className=" grid grid-cols-3 gap-4 ">
-                            <span className=" capitalize col-span-1 ">
-                                {item.name}
-                            </span>
-                            <strong className=" capitalize text-popover col-span-2 ">
-                                {item.value}
-                            </strong>
-                        </div>
-                    );
-                })}
-            </div>
-            <div className=" mx-2 my-[3rem]  ">
-                <h2 className="mb-4 text-popover text-3xl font-semibold recoleta ">
-                    {project.title}
-                </h2>
-                <p>{project.introduction}</p>
-                <Link href={project.url || ""}>
-                    <Button
-                        size="sm"
-                        className="my-[2rem] flex items-center gap-2 bg-card text-foreground hover:text-white shadow-md "
-                    >
-                        <span>Visit Website</span> <ChevronRight size={16} />
-                    </Button>
-                </Link>
-                <div className="relative aspect-video overflow-clip  w-full rounded-lg my-[3rem]  ">
-                    <Image
-                        src={src}
-                        alt="project"
-                        sizes="(max-width: 650px) 600px, 650px"
-                        fill
-                        className=" inset-0 object-cover z-0 group-hover:scale-110 duration-150  "
-                        blurDataURL={`data:image/png;base64,${imageBlur}`}
-                        placeholder="blur"
-                        title={project.type.name}
-                    />
+    const src = project.image;
+
+    if (src) {
+        const imageBlur = await fetch(src).then(async (res) => {
+            return Buffer.from(await res.arrayBuffer()).toString("base64");
+        });
+        return (
+            <div>
+                <div className=" bg-secondary p-4 m-2 rounded-lg grid gap-2 ">
+                    {info.map((item, index) => {
+                        return (
+                            <div
+                                key={index}
+                                className=" grid grid-cols-3 gap-4 "
+                            >
+                                <span className=" capitalize col-span-1 ">
+                                    {item.name}
+                                </span>
+                                <strong className=" text-sm font-medium capitalize text-popover col-span-2 ">
+                                    {item.value}
+                                </strong>
+                            </div>
+                        );
+                    })}
                 </div>
-                <p>{project.description}</p>
+                <div className=" mx-2 my-[3rem]  ">
+                    <h2 className="mb-4 text-popover text-3xl font-semibold recoleta ">
+                        {project.title}
+                    </h2>
+                    <p>{project.introduction}</p>
+                    <Link href={project.url || ""}>
+                        <Button
+                            size="sm"
+                            className="my-[2rem] flex items-center gap-2 bg-card text-foreground hover:text-white shadow-md "
+                        >
+                            <span>Visit Website</span>{" "}
+                            <ChevronRight size={16} />
+                        </Button>
+                    </Link>
+                    <div className="relative aspect-w-16 aspect-h-9 overflow-clip  w-full rounded-lg my-[3rem]  ">
+                        <Image
+                            src={src}
+                            alt="project"
+                            sizes="(max-width: 650px) 600px, 650px"
+                            fill
+                            className=" inset-0 object-cover z-0 group-hover:scale-110 duration-150  "
+                            blurDataURL={`data:image/png;base64,${imageBlur}`}
+                            placeholder="blur"
+                            title={project.type.name}
+                        />
+                    </div>
+                    <p>{project.description}</p>
+                </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        return (
+            <div>
+                <div className=" bg-secondary p-4 m-2 rounded-lg grid gap-2 ">
+                    {info.map((item, index) => {
+                        return (
+                            <div
+                                key={index}
+                                className=" grid grid-cols-3 gap-4 "
+                            >
+                                <span className=" capitalize col-span-1 ">
+                                    {item.name}
+                                </span>
+                                <strong className=" c text-sm font-medium capitalize text-popover col-span-2 ">
+                                    {item.value}
+                                </strong>
+                            </div>
+                        );
+                    })}
+                </div>
+                <div className=" mx-2 my-[3rem]  ">
+                    <h2 className="mb-4 text-popover text-3xl font-semibold recoleta ">
+                        {project.title}
+                    </h2>
+                    <p>{project.introduction}</p>
+                    <Link href={project.url || ""}>
+                        <Button
+                            size="sm"
+                            className="my-[2rem] flex items-center gap-2 bg-card text-foreground hover:text-white shadow-md "
+                        >
+                            <span>Visit Website</span>{" "}
+                            <ChevronRight size={16} />
+                        </Button>
+                    </Link>
+
+                    <p>{project.description}</p>
+                </div>
+            </div>
+        );
+    }
 }
