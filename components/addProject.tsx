@@ -64,6 +64,7 @@ const UploadForm = ({ addProjectData }: any) => {
                 description: "Project add successfully",
             });
             router.refresh();
+            router.push("/dashboard");
         } catch (error) {
             console.error("Error uploading file:", error);
         } finally {

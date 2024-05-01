@@ -12,21 +12,14 @@ export default async function page() {
     return (
         <div>
             <div className=" grid gap-4 grid-rows-auto grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-                <div>
-                    <Sheet>
-                        <SheetTrigger asChild>
-                            <div
-                                className=" bg-secondary rounded-lg grid place-items-center py-[3rem] hover:bg-background cursor-pointer border-2 border-dotted border-muted "
-                                title="Add Project"
-                            >
-                                <Plus size={50} />
-                            </div>
-                        </SheetTrigger>
-                        <SheetContent>
-                            <UploadForm addProjectData={addProjectData} />
-                        </SheetContent>
-                    </Sheet>
-                </div>
+                <Link href={`dashboard/add-project`}>
+                    <div
+                        className=" bg-secondary rounded-lg grid place-items-center py-[3rem] hover:bg-background cursor-pointer border-2 border-dotted border-muted "
+                        title="Add Project"
+                    >
+                        <Plus size={50} />
+                    </div>
+                </Link>
                 {projects.length === 0 ? (
                     <div className=" bg-secondary rounded-lg grid place-items-center py-[3rem] hover:bg-background cursor-pointer border border-dotted text-lg recoleta  ">
                         No Projects! Please add projects
