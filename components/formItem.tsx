@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useToast } from "@/components/ui/use-toast";
+
 const axios = require("axios");
 
 import { z } from "zod";
@@ -36,9 +36,8 @@ const formSchema = z.object({
 });
 
 export default function FormCard() {
-    const { toast } = useToast();
-    const [error, setError] = useState("");
     const [pending, setPending] = useState(false);
+    const [message, setMessage] = useState("");
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -49,17 +48,14 @@ export default function FormCard() {
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
-            const url = "/api/send";
             setPending(true);
-            const response = await axios.post(url, values);
-            return response.data;
+            const response = await axios.post("/api/send", values);
+            const { message } = response.data.message;
+            setMessage(message);
         } catch (error: any) {
-            setError(error.message);
+            throw new Error(error);
         } finally {
             setPending(false);
-            toast({
-                description: "Message sent successfully",
-            });
         }
     }
     return (
@@ -134,9 +130,9 @@ export default function FormCard() {
                         "Send Message"
                     )}
                 </Button>
-                {error && (
-                    <FormItem className="bg-red-200/10 p-4 rounded-lg text-red-500">
-                        {error}
+                {message && (
+                    <FormItem className="bg-green-500/50 px-8 py-12 rounded-lg text-green-800">
+                        {message}
                     </FormItem>
                 )}
             </form>
