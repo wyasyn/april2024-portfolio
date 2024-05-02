@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "./ui/textarea";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { sendEmail } from "@/app/action";
 
 const formSchema = z.object({
     name: z
@@ -38,6 +39,7 @@ const formSchema = z.object({
 export default function FormCard() {
     const [pending, setPending] = useState(false);
     const [message, setMessage] = useState("");
+    const [error, setError] = useState("");
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -49,11 +51,18 @@ export default function FormCard() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
             setPending(true);
-            const response = await axios.post("/api/send", values);
-            const { message } = response.data.message;
-            setMessage(message);
-        } catch (error: any) {
-            throw new Error(error);
+            // const response = await axios.post("/api/send", values);
+            // const { message } = response.data.message;
+            // console.log(message);
+
+            const response = await sendEmail(values);
+            if (response?.message) {
+                setMessage(response.message);
+            } else if (response?.error) {
+                setError(response.error);
+            }
+        } catch (error) {
+            console.log(error);
         } finally {
             setPending(false);
         }
@@ -64,7 +73,7 @@ export default function FormCard() {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-8 flex flex-col gap-1"
             >
-                <div className=" grid grid-cols-2 gap-2">
+                <div className=" grid sm:grid-cols-2 gap-2">
                     <FormField
                         control={form.control}
                         name="name"
@@ -131,8 +140,13 @@ export default function FormCard() {
                     )}
                 </Button>
                 {message && (
-                    <FormItem className="bg-green-500/50 px-8 py-12 rounded-lg text-green-800">
+                    <FormItem className="bg-green-400 px-6 py-4 rounded-lg text-green-800 text-xs ">
                         {message}
+                    </FormItem>
+                )}
+                {error && (
+                    <FormItem className="bg-red-400 px-6 py-4 rounded-lg text-red-800 text-xs">
+                        {error}
                     </FormItem>
                 )}
             </form>

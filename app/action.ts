@@ -1,6 +1,13 @@
 "use server";
-
 import prisma from "@/lib/db";
+import React from "react";
+
+import { Resend } from "resend";
+import Email from "@/components/Email";
+
+const apiKey = process.env.RESEND_API_KEY;
+
+const resend = new Resend(apiKey);
 
 export const addProjectData = async ({
     title,
@@ -108,5 +115,34 @@ export const getProjectById = async (projectId: string) => {
         console.error("Error fetching project by ID:", error);
         // Return null or handle the error as needed
         return null;
+    }
+};
+
+export const sendEmail = async ({ email, name, message }: FormEmailProps) => {
+    try {
+        if (!email || !name || !message) return;
+        const { error } = await resend.emails.send({
+            from: "Yasin Walum <email@ywalum.com>",
+            to: "ywalum@gmail.com",
+            subject: "Message from ywalum.com",
+            reply_to: email as string,
+            react: React.createElement(Email, {
+                message: message as string,
+                email: email as string,
+                name: name as string,
+            }),
+        });
+        if (error) return;
+        ({
+            error: error,
+        });
+
+        return {
+            message: `${name}, Message sent successfully`,
+        };
+    } catch (error) {
+        return {
+            error: `Sorry ${name}, Message was not sent! Please check your internet connection.`,
+        };
     }
 };
