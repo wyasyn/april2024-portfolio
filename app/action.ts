@@ -20,33 +20,70 @@ export const addProjectData = async ({
     typeName,
 }: ProjectProps) => {
     try {
-        const client = await prisma.client.create({
-            data: {
+        let clientId, companyId, typeId;
+
+        // Check if client exists, if not, create new
+        let client = await prisma.client.findUnique({
+            where: {
                 name: clientName,
             },
         });
 
-        const company = await prisma.company.create({
-            data: {
+        if (!client) {
+            client = await prisma.client.create({
+                data: {
+                    name: clientName,
+                },
+            });
+        }
+
+        clientId = client.id;
+
+        // Check if company exists, if not, create new
+        let company = await prisma.company.findUnique({
+            where: {
                 name: companyName,
             },
         });
 
-        const type = await prisma.type.create({
-            data: {
+        if (!company) {
+            company = await prisma.company.create({
+                data: {
+                    name: companyName,
+                },
+            });
+        }
+
+        companyId = company.id;
+
+        // Check if type exists, if not, create new
+        let type = await prisma.type.findUnique({
+            where: {
                 name: typeName,
             },
         });
-        const project = await prisma.project.create({
+
+        if (!type) {
+            type = await prisma.type.create({
+                data: {
+                    name: typeName,
+                },
+            });
+        }
+
+        typeId = type.id;
+
+        // Create the project in the database
+        const newProject = await prisma.project.create({
             data: {
-                title: title,
-                description: description,
-                url: url,
-                image: image,
-                introduction: introduction,
-                clientId: client.id,
-                companyId: company.id,
-                typeId: type.id,
+                title,
+                description,
+                url,
+                image,
+                introduction,
+                clientId,
+                companyId,
+                typeId,
             },
         });
 

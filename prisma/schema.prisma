@@ -9,7 +9,7 @@ datasource db {
 
 model Client {
   id    String  @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
+  name  String  @unique
   email String?
   phone String?
 
@@ -20,7 +20,7 @@ model Client {
 
 model Company {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
+  name     String  @unique
   industry String?
 
   Project Project[]
