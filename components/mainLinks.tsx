@@ -92,17 +92,22 @@ export default function MainLinks() {
             url={link.url}
           />
         ))}
-        <SignedOut>
-          <SignInButton>
-            <Button size="icon" variant="ghost">
-              <LogIn className=" w-5 " />
-              <span className=" sr-only ">sign in</span>
-            </Button>
-          </SignInButton>
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
+        <ClerkLoading>
+          <Loader2 className=" h-4 w-4 animate-spin" />
+        </ClerkLoading>
+        <ClerkLoaded>
+          <SignedOut>
+            <SignInButton>
+              <Button size="icon" variant="ghost">
+                <LogIn className=" w-5 " />
+                <span className=" sr-only ">sign in</span>
+              </Button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+        </ClerkLoaded>
       </div>
     </>
   );
